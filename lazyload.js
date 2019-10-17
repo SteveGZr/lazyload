@@ -29,13 +29,28 @@
         root = window;
     }
 
+    /**
+     * Default values for the options a user can give to the lazyload function
+     * @attr {String} src         Attribute in which a src is saved before the
+     *                            lazy load
+     * @attr {String} srcset      Attribute in which a srcset is saved before
+     *                            the lazy load
+     * @attr {String} selector    CSS selector for the elements that should be
+     *                            lazy loaded
+     * @attr {Object} root        -
+     * @attr {String} rootMargin  -
+     * @attr {Number} threshold   -
+     * @attr {Function} callback  A callback function that is executed on an
+     *                            element as soon as it is lazy loaded
+     */
     const defaults = {
         src: "data-src",
         srcset: "data-srcset",
         selector: ".lazyload",
         root: null,
         rootMargin: "0px",
-        threshold: 0
+        threshold: 0,
+        callback: undefined
     };
 
     /**
@@ -119,6 +134,9 @@
                         } else {
                             entry.target.style.backgroundImage = "url(" + src + ")";
                         }
+                        if (this.settings.callback) {
+                            this.settings.callback(entry.target);
+                        }
                     }
                 });
             }, observerConfig);
@@ -150,6 +168,9 @@
                     }
                 } else {
                     image.style.backgroundImage = "url('" + src + "')";
+                }
+                if (this.settings.callback) {
+                    this.settings.callback(image);
                 }
             });
         },
