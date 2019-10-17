@@ -127,12 +127,16 @@
                         if ("img" === entry.target.tagName.toLowerCase()) {
                             if (src) {
                                 entry.target.src = src;
+                                entry.target.removeAttribute(self.settings.src);
                             }
                             if (srcset) {
                                 entry.target.srcset = srcset;
+                                entry.target.removeAttribute(
+                                    self.settings.srcset);
                             }
                         } else {
                             entry.target.style.backgroundImage = "url(" + src + ")";
+                            entry.target.removeAttribute(self.settings.src);
                         }
                         if (this.settings.callback) {
                             this.settings.callback(entry.target);
@@ -162,12 +166,15 @@
                 if ("img" === image.tagName.toLowerCase()) {
                     if (src) {
                         image.src = src;
+                        image.removeAttribute(self.settings.src);
                     }
                     if (srcset) {
                         image.srcset = srcset;
+                        image.removeAttribute(self.settings.srcset);
                     }
                 } else {
                     image.style.backgroundImage = "url('" + src + "')";
+                    image.removeAttribute(self.settings.src);
                 }
                 if (this.settings.callback) {
                     this.settings.callback(image);
