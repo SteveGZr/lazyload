@@ -123,12 +123,24 @@
                         let srcset = entry.target.getAttribute(self.settings.srcset);
                         if ("img" === entry.target.tagName.toLowerCase()) {
                             if (src) {
+                                entry.target.onload = function() {
+                                    entry.target.removeAttribute(
+                                        self.settings.src);
+                                };
                                 entry.target.src = src;
                             }
                             if (srcset) {
+                                entry.target.onload = function() {
+                                    entry.target.removeAttribute(
+                                        self.settings.srcset);
+                                };
                                 entry.target.srcset = srcset;
                             }
                         } else {
+                            entry.target.onload = function() {
+                                entry.target.removeAttribute(
+                                    self.settings.src);
+                            };
                             entry.target.style.backgroundImage = "url(" + src + ")";
                         }
                     }
@@ -155,12 +167,21 @@
                 let srcset = image.getAttribute(self.settings.srcset);
                 if ("img" === image.tagName.toLowerCase()) {
                     if (src) {
+                        image.onload = function() {
+                            image.removeAttribute(self.settings.src);
+                        };
                         image.src = src;
                     }
                     if (srcset) {
+                        image.onload = function() {
+                            image.removeAttribute(self.settings.srcset);
+                        };
                         image.srcset = srcset;
                     }
                 } else {
+                    image.onload = function() {
+                        image.removeAttribute(self.settings.src);
+                    };
                     image.style.backgroundImage = "url('" + src + "')";
                 }
             });
