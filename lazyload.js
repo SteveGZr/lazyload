@@ -91,10 +91,9 @@
     LazyLoad.prototype = {
         init: function() {
 
-            /* Without observers load everything and bail out early. */
+            /* Without observers load IntersectionObserver Polyfill. */
             if (!root.IntersectionObserver) {
-                this.loadImages();
-                return;
+                require("intersection-observer");
             }
 
             let self = this;
