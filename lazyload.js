@@ -111,7 +111,7 @@
              */
             if (!root.IntersectionObserver) {
                 if (root.MutationObserver) {
-                  require("intersection-observer");
+                  // #include("intersection-observer");
                 }
                 else {
                   this.loadImages();
