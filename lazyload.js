@@ -154,6 +154,7 @@
                             };
                             entry.target.style.backgroundImage = "url(" + src + ")";
                         }
+                        self.fireLazyLoadEvent(entry.target);
                     }
                 });
             }, observerConfig);
@@ -161,6 +162,18 @@
             Array.prototype.forEach.call(this.images, function (image) {
                 self.observer.observe(image);
             });
+        },
+
+        fireLazyLoadEvent: function (elem) {
+            var ev;
+            if (document.createEvent) {
+                ev = document.createEvent("Event");
+                ev.initEvent("finishedLazyLoad", true, true);
+            }
+            else {
+                ev = new Event("finishedLazyLoad");
+            }
+            elem.dispatchEvent(ev);
         },
 
         loadAndDestroy: function () {
